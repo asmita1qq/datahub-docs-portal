@@ -45,6 +45,20 @@ const config = {
 
 
   themes: ["docusaurus-theme-openapi-docs"],
+  themeConfig: {
+  navbar: {
+    title: 'DataHub Portal',
+    items: [
+      {
+        type: 'docSidebar',
+        sidebarId: 'tutorialSidebar',
+        position: 'left',
+        label: 'Guides & Reference',
+      },
+    ],
+  },
+  },
+
 };
 
 module.exports = config;

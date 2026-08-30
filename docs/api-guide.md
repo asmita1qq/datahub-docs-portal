@@ -1,3 +1,9 @@
+---
+slug: /
+sidebar_position: 1
+title: 📊 DataHub API Reference
+---
+
 # DataHub API Reference
 
 DataHub is an internal data catalog and metrics service. It helps teams discover available datasets, understand what a metric means and how it's calculated, and trace how data flows between systems.
