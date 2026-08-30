@@ -28,6 +28,9 @@ jobs:
 
       - name: Compile API Schemas
         run: npx docusaurus gen-api-docs all
+      
+      - name: Manufacture Production Website Pages
+        run: npm run build
 
       - name: Build and Publish Website
         uses: s0/git-publish-subdir-action@v2.6.0
