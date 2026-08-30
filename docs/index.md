@@ -1,6 +1,5 @@
 ---
-slug: /
-sidebar_position: 1
+sidebar_position: 2
 title: 📊 DataHub API Documentation
 ---
 
@@ -12,7 +11,7 @@ This is the complete documentation set for the DataHub API: getting started, aut
 
 ![DataHub Core Architecture Overview](/img/datahub-api-lp.png)
 
-**Base URL:** `https://api.datahub.internal/v1`
+**Base URL:** `https://datahub-mock-api.onrender.com`
 
 ---
 
@@ -44,13 +43,13 @@ The DataHub API gives programmatic access to three things:
 **Base URL**
 
 ```
-https://api.datahub.internal/v1
+https://datahub-mock-api.onrender.com
 ```
 
 **Staging URL**
 
 ```
-https://api.datahub-staging.internal/v1
+https://datahub-mock-api.onrender.com/staging
 ```
 
 All requests and responses use `application/json`.
