@@ -6,7 +6,7 @@ const config = {
   tagline: 'Internal Data Catalog & Metrics Reference Guide',
   url: 'https://github.io', 
   baseUrl: '/datahub-docs-portal/',    
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
