@@ -7,6 +7,7 @@ const config = {
   url: 'https://github.io', 
   baseUrl: '/datahub-docs-portal/',    
   onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
   presets: [
@@ -17,7 +18,6 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           docItemComponent: "@theme/ApiItem", 
-          onBrokenMarkdownLinks: 'warn',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
