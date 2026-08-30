@@ -1,0 +1,70 @@
+---
+id: get-dataset-lineage
+title: "Get dataset lineage"
+description: "Returns the upstream sources that feed this dataset and the downstream datasets or metrics that depend on it. Useful for impact analysis before making changes to a data source."
+sidebar_label: "Get dataset lineage"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVktv4zYQ/isETy2g2sliTzrVQLJbA0US7DqnbWCMybHEXT4Uzshe19B/L0hJfiRBkkN76MkWyRl+3/Cbx14yVCTLb/JP4xEqlA+F1EgqmoZN8LKUX5Db6ElwjaJtiCOCExTaqDAtAos1ohZcGxIaGAhZgNf5vA5bP1gMWyRCFA45GjVYa2zQaxG8MDwR94Tr1op1iMK4BlTyBXZHhsQK1yGicPDD+EqoGnyVEAQB2fmAafKXl4VsIIJDxpi47aUHh7KUA4a5loU0iVsDXMtCRnxsTUQtS44tPg3AIhH35rFFYTR6NmuDUYR1z7B3OZGFJFWjA1nuJe+adB1xNL6SXSHxJ7jGpjXVEgeHcYkb9Eyye0jXUxM8ISXbDxcX6eccwvA4oorQ1Dk46e4EG4lRn6JQwTN6Tj6gaaxRkHxMv1NytH8OMqy+o+IUshgajGx6GIPHpdHPCb3Kp5CjSE4MIUbYyaeBvTq+WpbFQSJHVRnP4UxaiaJhdPQ2hbegE1YOPS8jbJcD4q4Yzr9qlxEvaUeMTnZd1xXyKPR3sX4xESCi0BjNBrVYx+D+K94ueK7tbgmKzQaXLaUseRfzHm6mnM4bzqtj5ehXP158fK7fxZlaI/YhFCq0VgsfWKxQrEPr9b+oYIwxxKUK+g1SV7PF7Ov1Ynlzu1h+ur2/uUqxcEiUOL1qeRMOBW8L1BMQW8N1zs7KbNCL+dVEngbrOqEaI+iQ66BlKSvM+FM1KuV0zIPp/lCwuqkdolxIwrgZC1sbrSxlzdxQOZ1CYybJpG5XE+MZowc73Vw+k+BdDLpV+aMrXnHyGzFUxlevOvvan8mVzPh1yDEb2Cat/9GuxOxu/mIepD1DArwYb+hLuQIGG6rcR8YcSbSNwj5XarQNCUZwJLQhFTYYBWzAWFjZQ1WmQrReYyQ+OhIa18abBIKKvlFFUL2JGIIsQMVAfcsLsQJv/s4anIhFSsnZ3Vw0YYuxPzESGUHfz7NbsDZsSQSuMR7pcQg2N63HFuPurGEO+BwyZDBNDFUE54CNAmt3fWdLT98H8HJyMbkY8gVUzpehz83IGQaxiCZJKpUgdGDSI0Pe4WHj8sPvVdqYqJBrnzUKPeGJp/mI+55Q3Hq7y2JuArEDf3LuM/KBy1GpZw++Pyb2/3OmGAoB40+eNhaMz80u5c5+SN1vY9skWcjydNqwx+mqDsTp6H6/AsL7aLsuLWc9yPLbQyE3EE2Scc5wbSj917Jcg6Wnw8lpUH/5Mowxv4r3jiwvUhq7l0/C2YBt05cs5A/cnc1Q3UNXyBpBY8xI+/2ZUtjwieWzGp4KxaHyfb5eyK77B23ls9w=
+sidebar_class_name: "get api-method"
+info_path: api/datahub-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get dataset lineage"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/datasets/{datasetId}/lineage"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Returns the upstream sources that feed this dataset and the downstream datasets or metrics that depend on it. Useful for impact analysis before making changes to a data source.
+
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  {...require("./get-dataset-lineage.ParamsDetails.json")}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  {...require("./get-dataset-lineage.RequestSchema.json")}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  {...require("./get-dataset-lineage.StatusCodes.json")}
+>
+  
+</StatusCodes>
+
+
+      

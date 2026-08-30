@@ -1,0 +1,1 @@
+{"parameters":[{"name":"metricId","in":"path","required":true,"description":"The unique identifier of the metric.","schema":{"type":"string"},"example":"monthly_active_users"}]}

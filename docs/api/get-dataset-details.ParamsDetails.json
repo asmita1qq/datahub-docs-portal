@@ -1,0 +1,1 @@
+{"parameters":[{"name":"datasetId","in":"path","required":true,"description":"The unique identifier of the dataset.","schema":{"type":"string"},"example":"customer_events"}]}
