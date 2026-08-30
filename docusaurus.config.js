@@ -26,17 +26,23 @@ const config = {
     ],
   ],
 
-  plugins: [
+    plugins: [
     [
       'docusaurus-plugin-openapi-docs',
       {
         id: "api",
         docsPluginId: "classic",
-        specPath: "datahub-api.yaml", 
-        outputDir: "docs/api",        
+        // 📦 Wrap everything inside this required config container!
+        config: {
+          datahub: {
+            specPath: "datahub-api.yaml", // Points to your typed Swagger file
+            outputDir: "docs/api",        // Where web components generate
+          }
+        }
       },
     ],
   ],
+
 
   themes: ["docusaurus-theme-openapi-docs"],
 };
