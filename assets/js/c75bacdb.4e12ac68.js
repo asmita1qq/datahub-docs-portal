@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdatahub_docs_portal||=[]).push([[8626],{55706(a){a.exports=JSON.parse('{"metadata":{"permalink":"/datahub-docs-portal/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
