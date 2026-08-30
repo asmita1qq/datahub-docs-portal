@@ -18,6 +18,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           docItemComponent: "@theme/ApiItem", 
+          routeBasePath: '/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
