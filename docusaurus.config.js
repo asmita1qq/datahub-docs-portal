@@ -4,7 +4,7 @@
 const config = {
   title: 'DataHub API Portal',
   tagline: 'Internal Data Catalog & Metrics Reference Guide',
-  url: 'https://github.io', 
+  url: 'https://asmita1qq.github.io', 
   baseUrl: '/datahub-docs-portal/',    
   onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
