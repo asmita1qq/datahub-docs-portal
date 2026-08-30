@@ -1,0 +1,360 @@
+openapi: 3.0.3
+info:
+  title: DataHub API
+  description: >
+    DataHub is an internal data catalog and metrics service that helps teams
+    discover available datasets, understand metric definitions, and trace
+    data lineage across the organization. This API powers the DataHub
+    catalog UI and allows other internal tools to query dataset and metric
+    metadata programmatically.
+  version: 1.0.0
+  contact:
+    name: Asmita Tripathy
+    email: asmitatripathy12@gmail.com
+  license:
+    name: Internal Use Only
+
+servers:
+  - url: https://api.datahub.internal/v1
+    description: Production
+  - url: https://api.datahub-staging.internal/v1
+    description: Staging
+
+tags:
+  - name: Datasets
+    description: Operations for discovering and inspecting datasets
+  - name: Metrics
+    description: Operations for discovering metric definitions and calculation logic
+  - name: Lineage
+    description: Operations for tracing upstream and downstream data flow
+
+paths:
+  /datasets:
+    get:
+      tags: [Datasets]
+      summary: List all datasets
+      description: >
+        Returns a paginated list of datasets available in the catalog.
+        Supports filtering by owning team or tag to help users narrow
+        results when browsing.
+      parameters:
+        - name: owner_team
+          in: query
+          description: Filter datasets by owning team.
+          required: false
+          schema:
+            type: string
+          example: Pricing
+        - name: tag
+          in: query
+          description: Filter datasets by a tag (e.g. "revenue", "retail").
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for paginated results.
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          description: Number of results per page.
+          required: false
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: A paginated list of datasets.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                    example: 42
+                  page:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DatasetSummary'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /datasets/{datasetId}:
+    get:
+      tags: [Datasets]
+      summary: Get dataset details
+      description: >
+        Returns full metadata for a single dataset, including its schema,
+        ownership, source system, and update frequency.
+      parameters:
+        - $ref: '#/components/parameters/DatasetId'
+      responses:
+        '200':
+          description: Dataset details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /datasets/{datasetId}/lineage:
+    get:
+      tags: [Lineage]
+      summary: Get dataset lineage
+      description: >
+        Returns the upstream sources that feed this dataset and the
+        downstream datasets or metrics that depend on it. Useful for
+        impact analysis before making changes to a data source.
+      parameters:
+        - $ref: '#/components/parameters/DatasetId'
+      responses:
+        '200':
+          description: Lineage graph for the requested dataset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lineage'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /metrics:
+    get:
+      tags: [Metrics]
+      summary: List all metrics
+      description: >
+        Returns a paginated list of metric definitions available in the
+        catalog. Supports filtering by owning team or related dataset.
+      parameters:
+        - name: owner_team
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: related_dataset_id
+          in: query
+          description: Filter metrics that are calculated from a given dataset.
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: A paginated list of metrics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                    example: 18
+                  page:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MetricSummary'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /metrics/{metricId}:
+    get:
+      tags: [Metrics]
+      summary: Get metric details
+      description: >
+        Returns the full definition of a metric, including its calculation
+        formula, unit, owning team, and the dataset it is derived from.
+      parameters:
+        - $ref: '#/components/parameters/MetricId'
+      responses:
+        '200':
+          description: Metric details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metric'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  parameters:
+    DatasetId:
+      name: datasetId
+      in: path
+      required: true
+      description: The unique identifier of the dataset.
+      schema:
+        type: string
+      example: customer_events
+    MetricId:
+      name: metricId
+      in: path
+      required: true
+      description: The unique identifier of the metric.
+      schema:
+        type: string
+      example: monthly_active_users
+
+  schemas:
+    DatasetSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          example: customer_events
+        name:
+          type: string
+          example: Customer Events
+        description:
+          type: string
+          example: Raw event stream capturing customer interactions across web and mobile.
+        owner_team:
+          type: string
+          example: Growth Analytics
+        update_frequency:
+          type: string
+          example: Hourly
+        tags:
+          type: array
+          items:
+            type: string
+          example: [events, customer, streaming]
+
+    Dataset:
+      allOf:
+        - $ref: '#/components/schemas/DatasetSummary'
+        - type: object
+          properties:
+            source_system:
+              type: string
+              example: Segment
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SchemaField'
+            row_count_estimate:
+              type: integer
+              example: 15200000
+            last_updated_at:
+              type: string
+              format: date-time
+              example: '2026-08-25T04:00:00Z'
+
+    SchemaField:
+      type: object
+      properties:
+        name:
+          type: string
+          example: user_id
+        type:
+          type: string
+          example: string
+        description:
+          type: string
+          example: Unique identifier for the customer who triggered the event.
+
+    Lineage:
+      type: object
+      properties:
+        dataset_id:
+          type: string
+          example: customer_events
+        upstream:
+          type: array
+          description: Data sources or datasets that feed into this dataset.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: segment_raw_stream
+              type:
+                type: string
+                example: source_system
+        downstream:
+          type: array
+          description: Datasets or metrics that are derived from this dataset.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: monthly_active_users
+              type:
+                type: string
+                example: metric
+
+    MetricSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          example: monthly_active_users
+        name:
+          type: string
+          example: Monthly Active Users
+        unit:
+          type: string
+          example: count
+        owner_team:
+          type: string
+          example: Growth Analytics
+
+    Metric:
+      allOf:
+        - $ref: '#/components/schemas/MetricSummary'
+        - type: object
+          properties:
+            definition:
+              type: string
+              example: The number of distinct customers who triggered at least one product event in the last 30 days.
+            calculation_formula:
+              type: string
+              example: COUNT(DISTINCT user_id) WHERE event_date >= CURRENT_DATE - 30
+            related_dataset_id:
+              type: string
+              example: customer_events
+
+    Error:
+      type: object
+      properties:
+        error_code:
+          type: string
+          example: DATASET_NOT_FOUND
+        message:
+          type: string
+          example: No dataset was found with the given ID.
+
+  responses:
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource could not be found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
