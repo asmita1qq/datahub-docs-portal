@@ -1,3 +1,9 @@
+---
+slug: /advanced-reference
+sidebar_position: 3
+title: 🔌 Advanced Developer Reference Guide
+---
+
 # DataHub API Reference
 
 DataHub is an internal data catalog and metrics service. It helps teams discover available datasets, understand what a metric means and how it's calculated, and trace how data flows between systems.

@@ -1,4 +1,5 @@
 ---
+slug: /index
 sidebar_position: 2
 title: 📊 DataHub API Documentation
 ---
