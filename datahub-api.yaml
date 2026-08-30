@@ -15,9 +15,9 @@ info:
     name: Internal Use Only
 
 servers:
-  - url: https://api.datahub.internal/v1
+  - url: https://datahub-mock-api.onrender.com
     description: Production
-  - url: https://api.datahub-staging.internal/v1
+  - url: https://datahub-mock-api.onrender.com/staging
     description: Staging
 
 tags:
