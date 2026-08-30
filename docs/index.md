@@ -9,9 +9,10 @@ DataHub is an internal data catalog and metrics service. It helps teams discover
 
 This is the complete documentation set for the DataHub API: getting started, authentication, core concepts, the full endpoint reference, and operational details like pagination, errors, and rate limits.
 
+**Base URL:** `https://datahub-mock-api.onrender.com`
+
 ![DataHub Core Architecture Overview](/img/datahub-api-lp.png)
 
-**Base URL:** `https://datahub-mock-api.onrender.com`
 
 ---
 
